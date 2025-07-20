@@ -1,13 +1,14 @@
+// webpack.config.js
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.js', // main React entry file
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/', // Use root for Firebase Hosting
+    publicPath: './', // ensures correct asset paths for Firebase Hosting
   },
   module: {
     rules: [
@@ -31,19 +32,20 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: './public/index.html', // This is your app’s template
+      filename: 'index.html',          // Output index.html in dist/
+      inject: 'body',                  // Auto-inject bundle.js
     }),
-    new Dotenv(),
+    new Dotenv(), // load .env for Firebase config
   ],
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
-      serveIndex: false,
     },
-    historyApiFallback: true,
+    historyApiFallback: true, // SPA routing support
     port: 3000,
     open: true,
     hot: true,
   },
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  mode: 'production', // for deployment
 };
