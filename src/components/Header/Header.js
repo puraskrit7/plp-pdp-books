@@ -37,7 +37,7 @@ const Header = ({ cartCount }) => {
 
   return (
     <header className="header-nav">
-      <span>Bookstore</span>
+      <span>Welcome to Puraskrit's Bookstore</span>
       
       <div className="header-actions">
         <div className="cart-icon">
