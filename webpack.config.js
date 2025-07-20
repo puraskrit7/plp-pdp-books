@@ -1,5 +1,6 @@
 // Node.js path module - helps with directory/file paths
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 // Plugin to generate HTML file and inject bundles automatically
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -42,10 +43,10 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    // Generates HTML file using template and injects JS/CSS bundles
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new Dotenv(), // Add this
   ],
   devServer: {
     // Serves static files from public directory (for assets like images)
