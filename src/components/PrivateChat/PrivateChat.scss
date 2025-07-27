@@ -1,0 +1,130 @@
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #f7f7f7;
+
+  .chat-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #444;
+    color: white;
+
+    .back-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 20px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      background: #666;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .details {
+      .name {
+        font-weight: 600;
+        margin: 0;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .chat-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background: #f7f7f7;
+
+    .message-bubble {
+      max-width: 70%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      position: relative;
+
+      &.sent {
+        background: #d1e7ff;
+        align-self: flex-end;
+        border-top-right-radius: 0;
+      }
+
+      &.received {
+        background: #e5e5e5;
+        align-self: flex-start;
+        border-top-left-radius: 0;
+      }
+
+      .text {
+        margin: 0;
+        color: #333;
+      }
+
+      .time {
+        font-size: 11px;
+        color: gray;
+        margin-top: 4px;
+        text-align: right;
+      }
+    }
+  }
+
+  .chat-input {
+    display: flex;
+    padding: 10px;
+    background: #fafafa;
+    border-top: 1px solid #ddd;
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 0 20px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+
+      &:hover {
+        background: #0069d9;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .chat-header {
+      .back-btn {
+        display: block;
+      }
+    }
+
+    .chat-body {
+      padding: 10px;
+    }
+  }
+}

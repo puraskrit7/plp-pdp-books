@@ -1,19 +1,19 @@
-// Header.jsx
 import React, { useState, useEffect } from "react";
-import { ShoppingCart, UserCircle2 } from "lucide-react";
+import { ShoppingCart, UserCircle2, MessageCircle } from "lucide-react"; // Added MessageCircle
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import LoginPage from "../LoginPage/LoginPage";
+import ChatApp from "../ChatApp/ChatApp"; // New ChatApp wrapper
 import "./Header.scss";
 
 const Header = ({ cartCount }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Listen for login state
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
@@ -44,6 +44,13 @@ const Header = ({ cartCount }) => {
           <ShoppingCart size={24} />
           {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
         </div>
+
+        {/* Chat Icon (only if logged in) */}
+        {user && (
+          <div className="chat-icon" onClick={() => setShowChat(true)}>
+            <MessageCircle size={28} />
+          </div>
+        )}
 
         {/* Show Login/Signup if logged out */}
         {!user && (
@@ -77,6 +84,16 @@ const Header = ({ cartCount }) => {
           <div className="modal">
             <button className="close-btn" onClick={() => setShowModal(false)}>X</button>
             <LoginPage />
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Chat */}
+      {showChat && (
+        <div className="modal-overlay">
+          <div className="modal chat-modal">
+            <button className="close-btn" onClick={() => setShowChat(false)}>X</button>
+            <ChatApp currentUser={user} /> {/* Your chat app */}
           </div>
         </div>
       )}

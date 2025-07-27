@@ -10,8 +10,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: './',
-    clean: true,
+    publicPath: './', // Works for Firebase Hosting (relative paths)
+    clean: true, // Cleans /dist before each build
   },
   module: {
     rules: [
